@@ -28,3 +28,6 @@
 uint64_t uv__hrtime(uv_clocktype_t type) {
   return (uint64_t) gethrtime();
 }
+
+void uv__process_title_cleanup(void) {
+}

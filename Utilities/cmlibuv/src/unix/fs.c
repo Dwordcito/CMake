@@ -84,7 +84,8 @@
     defined(__NetBSD__)
 # include <sys/param.h>
 # include <sys/mount.h>
-#elif defined(__sun)      || \
+#elif defined(__hpux)     || \
+      defined(__sun)      || \
       defined(__MVS__)    || \
       defined(__NetBSD__) || \
       defined(__HAIKU__)  || \
@@ -662,6 +663,7 @@ static int uv__fs_closedir(uv_fs_t* req) {
 static int uv__fs_statfs(uv_fs_t* req) {
   uv_statfs_t* stat_fs;
 #if defined(__sun)      || \
+    defined(__hpux)     || \
     defined(__MVS__)    || \
     defined(__NetBSD__) || \
     defined(__HAIKU__)  || \

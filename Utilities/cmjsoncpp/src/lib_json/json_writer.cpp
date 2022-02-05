@@ -21,6 +21,18 @@
 #include <cmath>
 #include <cstdio>
 
+#if defined(__hpux)
+#if !defined(isfinite)
+#if defined(__ia64) && !defined(finite)
+#define isfinite(x)                                                            \
+  ((sizeof(x) == sizeof(float) ? _Isfinitef(x) : _Isfinite(x)))
+#endif
+#endif
+#if !defined(isnan)
+// IEEE standard states that NaN values will not compare to themselves
+#define isnan(x) (x != x)
+#endif
+
 #if !defined(isnan)
 #define isnan std::isnan
 #endif
@@ -61,7 +73,7 @@
 #if !defined(isfinite)
 #if defined(__ia64) && !defined(finite)
 #define isfinite(x)                                                            \
-  ((sizeof(x) == sizeof(float) ? _Isfinitef(x) : _IsFinite(x)))
+  ((sizeof(x) == sizeof(float) ? _Isfinitef(x) : _Isfinite(x)))
 #endif
 #endif
 #endif
